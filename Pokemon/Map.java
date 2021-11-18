@@ -39,15 +39,15 @@ public class Map {
     File myFile = null;
     if(mapNum == 1)
     {
-      myFile = new File("Area1.txt");
+      myFile = new File("Pokemon/Area1.txt");
     }
     else if(mapNum == 2)
     {
-      myFile = new File("Area2.txt");
+      myFile = new File("Pokemon/Area2.txt");
     }
     else if(mapNum == 3)
     {
-      myFile = new File("Area3.txt");
+      myFile = new File("Pokemon/Area2.txt");
     }
     try(Scanner file = new Scanner(myFile))
     {
