@@ -47,8 +47,6 @@ class Main {
     // Load main menu.
     while (menuChoice != 5 && trainer.getHp() > 0) {
       System.out.println(trainer);
-      System.out.println("Map: ");
-      System.out.println(m.mapToString(trainer.getLocation()));
       menuChoice = mainMenu();
       if (menuChoice == 1){
         m.reveal(trainer.getLocation());
@@ -70,7 +68,7 @@ class Main {
       System.out.println("You've exited the game.");
       }  
       if (menuChoice != 5){    
-      // Trainer has different encounters depending on his/her postition on the map.
+      // Trainer has different encounters depending on his/her position on the map.
       // Triggers loading of next map.
       if (encounter == 'f') { // Trigger loading of next map.
         mapNumber++;
@@ -121,7 +119,14 @@ class Main {
             {
               System.out.println("Which pokemon do you want to heal?\n" + trainer.getPokemonList());
               int potionChoice = CheckInput.getIntRange(1, trainer.getNumPokemon());
-              trainer.usePotion(potionChoice);
+              if (trainer.getPokemon(potionChoice - 1).getHp() > 0)
+              {
+                trainer.usePotion(potionChoice - 1);
+              }
+              else
+              {
+                System.out.println("You can't revive downed Pokemons.");
+              }
             }
             else
             {

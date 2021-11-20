@@ -13,12 +13,12 @@ import java.util.ArrayList;
  */
 public class Trainer extends Entity{
   
-  int money;
-  int potions;
-  int pokeballs;
-  Point loc;
-  Map map;
-  ArrayList<Pokemon> pokemon;
+  private int money;
+  private int potions;
+  private int pokeballs;
+  private Point loc;
+  private Map map;
+  private ArrayList<Pokemon> pokemon;
 
   /**
    * Creates a Trainer object with name n, object Pokemon p and object Map m as parameters.
@@ -100,15 +100,8 @@ public class Trainer extends Entity{
    * @param pokeindex index of the pokemon the trainer's using on.
    */
   public void usePotion(int pokeindex){
-      if(getPokemon(pokeindex).getHp() > 0)
-      {
           getPokemon(pokeindex).heal();
           potions--;
-      }
-      else
-      {
-          System.out.println("You can't revive downed Pokemons.");
-      }
   }
 
   /**
@@ -275,7 +268,7 @@ public class Trainer extends Entity{
    */
   @Override
   public String toString(){
-	  String str =  super.toString() + "\nMoney: " + money + "\nPotions: " + potions + "\nPoke Balls: " + pokeballs + "\n" + getPokemonList();
+	  String str =  super.toString() + "\nMoney: " + money + "\nPotions: " + potions + "\nPoke Balls: " + pokeballs + "\n" + getPokemonList() + "\n" + map.mapToString(loc);
     return str;
   }
 }
