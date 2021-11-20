@@ -4,6 +4,7 @@
 
 import java.awt.Point;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.lang.Exception;
 
@@ -63,7 +64,7 @@ public class Map {
         }
       }
     }
-    catch(Exception e)
+    catch(FileNotFoundException e)
     {
       System.out.println(e);
     }
