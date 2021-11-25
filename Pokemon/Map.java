@@ -1,5 +1,5 @@
 /*
-@Vritik Mistry
+@Vritik Mistry, Joshua Peng
 */
 
 import java.awt.Point;
@@ -9,23 +9,38 @@ import java.util.Scanner;
 import java.lang.Exception;
 
 /**
- * The Map class constructs a map which the trainer uses to explore the different areas
+ * The Map class is now a public Singleton class where there is only one map instance for the whole
+ * program. The Map class constructs a map which the trainer uses to explore the different areas
  * of the game and encounters different situations. The map is hidden from player in the
  * beginning and each area/encounter is revealed as trainer passes by the area.
- * @author Vritik Mistry
+ * @author Vritik Mistry, Joshua Peng
  */
 public class Map {
   private char [][] map;
   private boolean [][] revealed;
 
+  // Single Map instance.
+  private static Map instance = null;
+
   /**
    * Creates a Map object with variables map and revealed, which are 2D array types
    * with 5 rows and 5 columns.
    * **/
-  public Map() 
+  private Map()
   {
     map = new char[5][5];
     revealed = new boolean[5][5];
+  }
+
+  /**
+   * Gets single Map instance.
+   * @return static Map object.
+   */
+  public static Map getInstance(){
+    if (instance == null){
+      instance = new Map();
+    }
+    return instance;
   }
 
   /**
@@ -48,7 +63,7 @@ public class Map {
     }
     else if(mapNum == 3)
     {
-      myFile = new File("Pokemon/Area2.txt");
+      myFile = new File("Pokemon/Area3.txt");
     }
     try(Scanner file = new Scanner(myFile))
     {
@@ -173,7 +188,6 @@ public class Map {
    * Removes character 'i' at a certain point location of the trainer by replacing with 'n'. Occurs when trainer finds
    * an item and is randomly given a potion or pokeball.
    * @param p point location (x,y) of the trainer.
-   * @return character 'n' at the point (x,y) location of the trainer.
    * **/
   public void removeCharAtLoc(Point p)
   {

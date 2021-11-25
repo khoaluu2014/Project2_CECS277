@@ -27,7 +27,7 @@ class Main {
                        + "1. Charmander\n" + "2. Bulbasaur\n" + "3. Squirtle");
     // Validate player input.
     int pokemonChoice = CheckInput.getIntRange(1,3);
-    Map m = new Map();
+    Map m = Map.getInstance();
     Pokemon poke;
     if(pokemonChoice == 1)
     {
