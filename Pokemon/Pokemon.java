@@ -11,226 +11,128 @@
  * @author Khoa Luu
  */
 public abstract class Pokemon extends Entity{
-  
-  static final double [][] battleTable = {{1,.5,2}, {2,1,.5},{.5,2,1}};
 
-  /**
-   * Creates a Pokemon object and passes in the name of the pokemon as a parameter. 
-   * @param n name of the pokemon.
-   */ 
-  public Pokemon(String n)
-  {
+    static final double [][] battleTable = {{1,.5,2}, {2,1,.5},{.5,2,1}};
+
     /**
-    * Calls superclass Entity's constructor with matching parameters.
-	  * @param n name of pokemon.
-	  * @param 20 initial hp value for the pokemon.
-	  */
-    super(n, 20);  
-  }
+     * Calls superclass Entity's constructor with matching parameters.
+     * @param n, name of pokemon.
+     * @param h, hp of pokemon.
+     * @param m, maxHp of pokemon.
+     * Create a Pokemon object with passed in properties.
+     */
+    public Pokemon(String n, int h, int m) {
 
-  /**
-   * Abstract method to get menu for special attacks.
-   */
-  public abstract String getSpecialMenu();
-
-  /**
-   * Abstract method to get the number for the special attack that trainer chooses.
-   */ 
-  public abstract int getNumSpecialMenuItems();
-
-  /**
-   * Abstract method to determine special attack move description that trainer chooses.
-   * @param p the pokemon that is chosen by trainer or the wild pokemon that appeared.
-   * @param move number that indicates the type of special attack selected.
-   */
-  public abstract String specialAttack(Pokemon p, int move);
-
-  /**
-   * Get the basic menu which is the choice of basic attack or special attack.
-   * @return basic menu.
-   */
-  public String getBasicMenu()
-  {
-    String basicMenu = "";
-    
-    basicMenu = "1. Basic Attack \n2. Special Attack.\n";
-
-    return basicMenu;
-  }
-
-  /**
-   * Gets the number of trainer's choice for either basic attack or special attack.
-   * @return the number of choices of attack.
-   */
-  public int getNumBasicMenuItems()
-  {
-    return 2;
-  }
-
-  /**
-   * Gets the basic attack choice from trainer.
-   * @return type of basic attack
-   */
-  public String basicAttack(Pokemon p, int move)
-  {
-    String basicAttack = "";
-    
-    if(move == 1)
-    {
-      basicAttack = slam(p);
-    }
-    else if(move == 2)
-    {
-      basicAttack = tackle(p);
-    }
-    else if(move == 3)
-    {
-      basicAttack = tackle(p);
-    }
-    
-    return basicAttack;
-  }
-
-  /**
-   * Prints out basic attack menu.
-   * @return basic attack menu.
-   */
-  public String getAttackMenu()
-  {
-    String attackMenu = "";
-    
-    attackMenu = "1. Slam \n2. Tackle \n3. Punch";
-
-    return attackMenu;
-  }
-
-  /**
-   * Gets the number of trainer's choice of either basic attack or special attack.
-   * @return the number of choices of attack.
-   */
-  public int getNumAttackMenuItems()
-  {
-    return 3;
-  }
-
-  /**
-   * Generates the damage from the battle between the trainer's pokemon and the wild pokemon and 
-   * gives the battle description.
-   * @return the battle description for slam. 
-   */
-  public String slam(Pokemon p)
-  {
-    String slam = "";
-    slam = this.getName() + " uses slam on " + p.getName();
-    int damage = Rand.randIntRange(0, 5);
-    p.takeDamage(damage);
-    return slam;
-  } 
-
-  /**
-   * Generates the damage from the battle between the trainer's pokemon and the wild pokemon and 
-   * gives the battle description.
-   * @return the battle description for tackle
-   */
-  public String tackle(Pokemon p)
-  {
-    String tackle = "";
-    tackle = this.getName() + " uses tackle on " + p.getName();
-    int damage = Rand.randIntRange(2, 3);
-    p.takeDamage(damage);
-    return tackle;
-  } 
-
-  /**
-   * Generates the damage from the battle between the trainer's pokemon and the wild pokemon and 
-   * gives the battle description.
-   * @return the battle description for punch. 
-   */
-  public String punch(Pokemon p)
-  {
-    String punch = "";
-    punch = this.getName() + " uses punch on " + p.getName();
-    int damage = Rand.randIntRange(1, 4);
-    p.takeDamage(damage);
-    return punch;
-  }
-
-  /**
-   * Gets the elemental type of pokemon which is either fire, water, or grass.
-   * @return the type of pokemon.
-   */
-  public int getType()
-  {
-    int type = -1;
-    if(this instanceof Ponyta || this instanceof Charmander)
-    {
-      type = 0;
-    }
-    else if(this instanceof Squirtle || this instanceof Staryu)
-    {
-      type = 1;
-    }
-    else if(this instanceof Oddish || this instanceof Bulbasaur)
-    {
-      type = 2;
-    }
-    return type;
-  }
-
-   /**
-   * Gets the multiplier of the damage depending on the pokemon's type. It uses the battleTable
-   * index to identify the multiplier of damage.
-   * @return the damage multiplier.
-   */ 
-  public double damageMultiplier(Pokemon p)
-  {
-    double damageMultiplier = 0;
-    if(this.getType() == 0)
-    {
-      if(p.getType() == 0)
-      {
-        damageMultiplier = battleTable[0][0];
-      }
-      else if(p.getType() == 1)
-      {
-        damageMultiplier = battleTable[0][1];
-      }
-      else if(p.getType() == 2)
-      {
-        damageMultiplier = battleTable[0][2];
-      }
-    }
-    else if(this.getType() == 1)
-    {
-      if(p.getType() == 0)
-      {
-        damageMultiplier = battleTable[1][0];
-      }
-      else if(p.getType() == 1)
-      {
-        damageMultiplier = battleTable[1][1];
-      }
-      else if(p.getType() == 2)
-      {
-        damageMultiplier = battleTable[1][2];
-      }
-    }
-    else if(this.getType() == 2)
-    {
-      if(p.getType() == 0)
-      {
-        damageMultiplier = battleTable[2][0];
-      }
-      else if(p.getType() == 1)
-      {
-        damageMultiplier = battleTable[2][1];
-      }
-      else if(p.getType() == 2)
-      {
-        damageMultiplier = battleTable[2][2];
-      }
+      super(n, h, m);
     }
 
-    return damageMultiplier;
+    public String getAttackTypeMenu() {
+
+        return "1. Normal Attack \n2. Special Attack";
+
+
+    }
+
+    /**
+     * Gets the number of trainer's choice for either basic attack or special attack.
+     * @return the number of choices of attack.
+     */
+    public int getNumAttackTypeMenuItems()
+    {
+      return 2;
+    }
+
+    /**
+     * Prints out basic attack menu.
+     * @return basic attack menu.
+     */
+    public String getAttackMenu(int atkType)
+    {
+
+      return "1. Slam \n2. Tackle \n3. Punch";
+
+    }
+
+    /**
+     * Gets the number of trainer's choice of either basic attack or special attack.
+     * @return the number of choices of attack.
+     */
+    public int getNumAttackMenuItems(int atkType)
+    {
+      return 3;
+    }
+
+    public String attack(Pokemon p, int atkType, int move) {
+
+      int totalDmg = (int) (getAttackDamage(atkType, move) * getAttackMultiplier(p, atkType) + getAttackBonus(atkType));
+
+      return this.getName() + getAttackString(atkType, move) + p.getName() + "for " + totalDmg;
+
+    }
+
+    public String getAttackString(int atkType, int move) {
+      String atk = " ";
+
+      if(move == 1) {
+        atk = "uses Slam on ";
+      }
+      else if(move == 2) {
+        atk = "uses Tackle on ";
+      }
+      else if(move == 3) {
+        atk = "uses Punch on ";
+      }
+
+      return atk;
+    }
+
+    public int getAttackDamage(int atkType, int move) {
+      //slam
+      if(move == 1) {
+        return Rand.randIntRange(0, 5);
+      }
+      //tackle
+      else if(move == 2) {
+        return Rand.randIntRange(2, 3);
+      }
+      //punch
+      else if(move == 3) {
+        return Rand.randIntRange(1, 4);
+      }
+      return 0;
+    }
+
+    public double getAttackMultiplier(Pokemon p, int atkType)
+    {
+
+      return battleTable[this.getType()][p.getType()];
+
+    }
+
+    public int getAttackBonus(int atkType) {
+        return 0;
+    }
+
+    /**
+     * Gets the elemental type of pokemon which is either fire, water, or grass.
+     * @return the type of pokemon.
+     */
+    public int getType()
+    {
+      int type = -1;
+      if(this instanceof Fire)
+      {
+        type = 0;
+      }
+      else if(this instanceof Water)
+      {
+        type = 1;
+      }
+      else if(this instanceof Grass)
+      {
+        type = 2;
+      }
+      return type;
+    }
   }
-}
+
