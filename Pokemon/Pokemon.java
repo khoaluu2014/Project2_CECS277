@@ -105,7 +105,7 @@ public abstract class Pokemon extends Entity{
     public double getAttackMultiplier(Pokemon p, int atkType)
     {
 
-      return battleTable[this.getType()][p.getType()];
+      return 1;
 
     }
 
