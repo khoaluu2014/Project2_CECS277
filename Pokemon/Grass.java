@@ -9,6 +9,20 @@
  * @author Khoa Luu
  */
 public class Grass extends Pokemon{
+<<<<<<< Updated upstream
+=======
+
+  public Grass(String n, int h, int m) {
+    super(n, h, m);
+  }
+
+  @Override
+  public String getAttackMenu(int atkType) {
+    if(atkType == 2) {
+      System.out.print()
+    }
+  }
+>>>>>>> Stashed changes
 
 
   public Grass(String n, int h, int m) {
