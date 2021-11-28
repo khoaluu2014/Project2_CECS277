@@ -285,8 +285,8 @@ class Main {
       int choice = CheckInput.getIntRange(1, battlePokemon.getNumBasicMenuItems());
       if(choice == 1)
       {
-        System.out.println(battlePokemon.getAttackMenu());
-        int move = CheckInput.getIntRange(1, battlePokemon.getNumAttackMenuItems());
+        System.out.println(battlePokemon.getAttackMenu(choice));
+        int move = CheckInput.getIntRange(1, battlePokemon.getNumAttackMenuItems(choice));
         action += battlePokemon.basicAttack(wild, move);
       }
       else if(choice == 2)
