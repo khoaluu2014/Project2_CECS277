@@ -15,13 +15,14 @@ public abstract class Entity {
 
   /**
    * Creates an Entity object with name n and maximum health points mHp as parameters
-   * @param n name of trainer or pokemon.
-   * @param mHp maximum health points allowed for trainer or pokemons.
+   * @param n, name of trainer, trainer's pokemons  or wild pokemons.
+   * @param h, current health points for trainer and the pokemons.
+   * @param mHp, maximum health points allowed for trainer or pokemons.
    */
-  public Entity(String n, int mHp){
+  public Entity(String n, int h, int m){
     name = n;
-    maxHp = mHp;
-    hp = maxHp;
+    hp = h;
+    maxHp = m;
   }
 
   /**

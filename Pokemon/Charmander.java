@@ -8,12 +8,14 @@
  * the variables and methods for the special attacks which are based on its fire type.
  * @author Joshua Peng
  */
+/*
 public class Charmander extends Pokemon implements Fire{
 	public Charmander() {
     /**
 	   * Calls superclass Pokemon's constructor and assigns "Charmander" for name of pokemon.
 		 * @param "Charmander" name of trainer's pokemon or wild pokemon.
 		 */
+/*
 		super("Charmander");  		  
   }
 
@@ -22,6 +24,7 @@ public class Charmander extends Pokemon implements Fire{
    * created in Fire interface.
    * return@ string menu of special attacks for fire type.
    */
+/*
   public String getSpecialMenu() {
 	  return specialMenu;
   }
@@ -31,6 +34,7 @@ public class Charmander extends Pokemon implements Fire{
    * in Fire interface. Used in Main class to set the upper range for special attacks menu choices. 
    * return@ number of items in the special attack menu.
    */
+/*
   public int getNumSpecialMenuItems() {
 	  return  numSpecialMenuItems;
   }
@@ -42,6 +46,7 @@ public class Charmander extends Pokemon implements Fire{
    * @param p wild pokemon that trainer's pokemon is fighting with.
    * @return string summary of battle description.
    */
+/*
   public String ember(Pokemon p) {
 	  String ember = this.getName() + " uses EMBER on " + p.getName();
 	  double damage = Rand.randIntRange(0,3) * this.damageMultiplier(p);
@@ -56,6 +61,7 @@ public class Charmander extends Pokemon implements Fire{
    * @param p wild pokemon that trainer's pokemon is fighting with.
    * @return string summary of battle description.
    */
+/*
   public String fireBlast(Pokemon p) {
 	  String fireBlast = this.getName() + " uses FIRE BLAST on " + p.getName();
 	  double damage = Rand.randIntRange(1,4) * this.damageMultiplier(p);
@@ -70,6 +76,7 @@ public class Charmander extends Pokemon implements Fire{
    * @param p wild pokemon that trainer's pokemon is fighting with.
    * @return string summary of battle description.
    */
+/*
   public String firePunch(Pokemon p) {
 	  String firePunch = this.getName() + " uses FIRE PUNCH on " + p.getName();
 	  double damage = Rand.randIntRange(1,3) * this.damageMultiplier(p);
@@ -83,6 +90,7 @@ public class Charmander extends Pokemon implements Fire{
    * @param pokemon selected by trainer or wild pokemon that trainer encounters.
    * @return string summary of battle description based on move type by calling special attack method.
    */
+/*
   public String specialAttack(Pokemon p, int move) {
 	  if (move == 1) {
 			 return ember(p);
