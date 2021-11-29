@@ -3,7 +3,7 @@
 */
 
 /**
- * Fire class is a type of base pokemon with special functionalities and abilities. It inherits
+ * Fire class is a type of base pokemon with special functionalities and abilities.It inherits
  * variables and methods from Pokemon class.
  * @author Joshua Peng
  */
@@ -52,8 +52,8 @@ public class Fire extends Pokemon{
 
 	/**
 	 * Get the string for the different attacks based on the Fire type.
-	 * @param atkType Trainer chooses between basic attack or special attack.
-	 * @param move the move that the Trainer chooses.
+	 * @param atkType, trainer chooses between basic attack or special attack.
+	 * @param move, the move that trainer chooses.
 	 * @return the string description of the move.
 	 */
 	@Override
