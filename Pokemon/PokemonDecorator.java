@@ -92,7 +92,6 @@ public abstract class PokemonDecorator extends Pokemon{
      * @param atkType, trainer chooses between basic attack (1) or special attack (2).
      * @return damage multiplier or else returns 1 for basic attack which deals no multiplier.
      */
-    @Override
     public double getAttackMultiplier(Pokemon p, int atkType) {
         double damageMultiplier;
         if (atkType == 2) {
@@ -107,6 +106,7 @@ public abstract class PokemonDecorator extends Pokemon{
      * @param atkType, integer for the typye of attack, basic = 1 or special = 2.
      * @return attackBonus to be added to the calculated damage.
      */
+    @Override
     public int getAttackBonus(int atkType){
         int attackBonus = 0;
         if(atkType == 1) {
