@@ -28,7 +28,6 @@ public abstract class PokemonDecorator extends Pokemon{
      * Gets the menu for the basic attacks by returning the string with the menu choices.
      * return@ string menu for basic attacks..
      */
-    @Override
     public String getAttackMenu(int atkType)
     {
         return "1. Slam \n2. Tackle \n3. Punch";
@@ -38,7 +37,6 @@ public abstract class PokemonDecorator extends Pokemon{
      * Gets the number of trainer's choices for the basic attacks menu
      * @return the number of choices for basic attacks menu.
      */
-    @Override
     public int getNumAttackMenuItems(int atkType)
     {
        return 3;
@@ -49,7 +47,6 @@ public abstract class PokemonDecorator extends Pokemon{
      * @param move the move that trainer chooses.
      * @return the string description of the basic attacks that trainer chooses.
      */
-    @Override
     public String getAttackString(int atkType, int move)
     {
     String atkStr= " ";
@@ -72,7 +69,6 @@ public abstract class PokemonDecorator extends Pokemon{
      * @param move, the move that trainer chooses.
      * @return the damage amount for the basic attack move.
      */
-    @Override
     public int getAttackDamage(int atkType, int move)
     {
 
@@ -96,6 +92,7 @@ public abstract class PokemonDecorator extends Pokemon{
      * @param atkType, trainer chooses between basic attack (1) or special attack (2).
      * @return damage multiplier or else returns 1 for basic attack which deals no multiplier.
      */
+    @Override
     public double getAttackMultiplier(Pokemon p, int atkType) {
         double damageMultiplier;
         if (atkType == 2) {
