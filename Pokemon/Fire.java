@@ -60,17 +60,20 @@ public class Fire extends Pokemon{
 	public String getAttackString(int atkType, int move)
 	{
 		String atkStr = "";
-		if (atkType == 2 & move == 1)
+		if(atkType == 2)
 		{
-			atkStr = "uses AMBER on ";
-		}
-		if (atkType == 2 & move == 2)
-		{
-			atkStr = "uses FIRE BLAST on ";
-		}
-		if (atkType == 2 & move == 3)
-		{
-			atkStr = "uses FIRE PUNCH on ";
+			if (move == 1)
+			{
+				atkStr = "uses AMBER on ";
+			}
+			if (move == 2)
+			{
+				atkStr = "uses FIRE BLAST on ";
+			}
+			if (move == 3)
+			{
+				atkStr = "uses FIRE PUNCH on ";
+			}
 		}
 		return atkStr;
 	}
@@ -85,33 +88,36 @@ public class Fire extends Pokemon{
 	public int getAttackDamage(int atkType, int move)
 	{
 		int damage = 0;
-		if (atkType == 2 && move == 1)
+		if(atkType == 2)
 		{
-			damage = Rand.randIntRange(0, 5);
-		}
-		else if (atkType == 2 && move == 2)
-		{
-			damage = Rand.randIntRange(2, 3);
-		}
-		else if (atkType == 2 && move == 3)
-		{
-			damage = Rand.randIntRange(1, 4);
+			if (move == 1)
+			{
+				damage = Rand.randIntRange(0, 5);
+			}
+			else if (move == 2)
+			{
+				damage = Rand.randIntRange(2, 3);
+			}
+			else if (move == 3)
+			{
+				damage = Rand.randIntRange(1, 4);
+			}
 		}
 		return damage;
 	}
 
 	/**
-	 * Gets the damage multiplier for each combination of attack. Uses the
+	 * Gets the damage multiplier from Pokemon's class battleTable array for each combination of attack.
 	 * @param p, wild pokemon that the trainer is fighting with.
 	 * @param atkType, trainer chooses between basic attack (1) or special attack (2).
-	 * @return damage multiplier.
+	 * @return damage multiplier or else returns 1 for basic attack which deals no multiplier.
 	 */
 	public double getNumAttackMultiplier(Pokemon p, int atkType) {
-		double damageMultiplier = 0;
+		double damageMultiplier;
 		if (atkType == 2) {
 			damageMultiplier = battleTable[this.getType()][p.getType()];
 			return damageMultiplier;
 		}
-		return -1;
+		return 1;
 	}
 }
