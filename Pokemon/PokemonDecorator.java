@@ -106,17 +106,17 @@ public abstract class PokemonDecorator extends Pokemon{
     }
 
     /**
-     * Gets the attack bonus depending on if pokemons are buffed or debuffed.
-     * @param Type, pokemons are either buffed (1) or debuffed (2).
+     * Gets the attack bonus depending on the type of attack, basic or special.
+     * @param atkType, integer for the typye of attack, basic = 1 or special = 2.
      * @return attackBonus to be added to the calculated damage.
      */
-    public int getAttackBonus(int Type){
+    public int getAttackBonus(int atkType){
         int attackBonus = 0;
-        if(Type == 1) {
-            attackBonus = Rand.randIntRange(1, 2);
+        if(atkType == 1) {
+            attackBonus = 1;
         }
-        else if(Type == 2){
-            attackBonus = -(Rand.randIntRange(1, 2));
+        else if(atkType == 2){
+            attackBonus = 2;
         }
         return attackBonus;
     }
