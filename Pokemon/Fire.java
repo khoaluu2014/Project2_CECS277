@@ -112,11 +112,14 @@ public class Fire extends Pokemon{
 	 * @param atkType, trainer chooses between basic attack (1) or special attack (2).
 	 * @return damage multiplier or else returns 1 for basic attack which deals no multiplier.
 	 */
-	public double getNumAttackMultiplier(Pokemon p, int atkType) {
+	public double getAttackMultiplier(Pokemon p, int atkType) {
 		double damageMultiplier;
 		if (atkType == 2) {
 			damageMultiplier = battleTable[this.getType()][p.getType()];
 			return damageMultiplier;
+		}
+		else {
+			super.getAttackMultiplier(p, atkType);
 		}
 		return 1;
 	}

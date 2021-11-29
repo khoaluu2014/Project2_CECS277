@@ -9,21 +9,6 @@
  * @author Khoa Luu
  */
 public class Grass extends Pokemon{
-<<<<<<< Updated upstream
-=======
-
-  public Grass(String n, int h, int m) {
-    super(n, h, m);
-  }
-
-  @Override
-  public String getAttackMenu(int atkType) {
-    if(atkType == 2) {
-      System.out.print()
-    }
-  }
->>>>>>> Stashed changes
-
 
   public Grass(String n, int h, int m) {
     super(n, h, m);
@@ -33,7 +18,7 @@ public class Grass extends Pokemon{
   public String getAttackMenu(int atkType) {
     String atkMenu = "";
     if(atkType == 2) {
-      atkMenu = "1 Vine Whip \n2. Razor Leaf \n3. Solar Beam";
+      atkMenu = "1. Vine Whip \n2. Razor Leaf \n3. Solar Beam";
     }
     return atkMenu;
   }
@@ -82,6 +67,9 @@ public class Grass extends Pokemon{
     double multiplier = 0;
     if(atkType == 2) {
       multiplier = battleTable[this.getType()][p.getType()];
+    }
+    else {
+      super.getAttackMultiplier(p, atkType);
     }
     return multiplier;
   }

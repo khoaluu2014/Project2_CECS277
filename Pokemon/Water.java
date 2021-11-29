@@ -8,26 +8,69 @@
  * methods. 
  * @author Vritik Mistry
  */
-interface Water{
+public class Water extends Pokemon{
 
-  String specialMenu = "1.Water Gun\n2. Bubble Beam\n3. Waterfall";
-  int numSpecialMenuItems = 3;
+  public Water(String n, int h, int m) {
+    super(n, h, m);
+  }
 
-  /**
-   * Method to generate battle description and to calculate damage when Water Gun is choosen for special attack.
-   */
-  String waterGun(Pokemon p);
-  /**
-   * Method to generate battle description and to calculate damage when Bubble Beam is choosen for special attack.
-   */
-  String bubbleBeam(Pokemon p);
-  /**
-   * Method to generate battle description and to calculate damage when Waterfall is choosen for special attack.
-   */
-  String waterFall(Pokemon p);
-  
-  
+  @Override
+  public String getAttackMenu(int atkType) {
+    String atkMenu = "";
+    if(atkType == 2) {
+      atkMenu = "1. Water Gun \n2. Bubble Beam \n3. Waterfall";
+    }
+    return atkMenu;
+  }
 
+  @Override
+  public int getNumAttackMenuItems(int atkType) {
+    return 3;
+  }
 
+  @Override
+  public String getAttackString(int atkType, int move) {
+    String atk = "";
+    if(atkType == 2) {
+      if(move == 1) {
+        atk = " uses WATER GUN on ";
+      }
+      else if(move == 2) {
+        atk = " uses BUBBLE BEAM on ";
+      }
+      else if (move == 3) {
+        atk = " uses WATERFALL on ";
+      }
+    }
+    return atk;
+  }
 
+  @Override
+  public int getAttackDamage(int atkType, int move) {
+    int dmg = 0;
+    if(atkType == 2) {
+      if(move == 1) {
+        dmg = Rand.randIntRange(1, 3);
+      }
+      else if(move == 2) {
+        dmg = Rand.randIntRange(2, 4);
+      }
+      else if(move == 3) {
+        dmg = Rand.randIntRange(0, 5);
+      }
+    }
+    return dmg;
+  }
+
+  @Override
+  public double getAttackMultiplier(Pokemon p, int atkType) {
+    double multiplier = 0;
+    if(atkType == 2) {
+      multiplier = battleTable[this.getType()][p.getType()];
+    }
+    else {
+      super.getAttackMultiplier(p, atkType);
+    }
+    return multiplier;
+  }
 }
