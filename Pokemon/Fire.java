@@ -3,7 +3,7 @@
 */
 
 /**
- * Fire class is a type of base pokemon with special functionalities and abilities. It inherits
+ * Fire class is a type of base pokemon with special functionalities and abilities.It inherits
  * variables and methods from Pokemon class.
  * @author Joshua Peng
  */
