@@ -30,7 +30,7 @@ public abstract class PokemonDecorator extends Pokemon{
      */
     public String getAttackMenu(int atkType)
     {
-        return "1. Slam \n2. Tackle \n3. Punch";
+        return pokemon.getAttackMenu(atkType);
     }
 
     /**
@@ -39,7 +39,7 @@ public abstract class PokemonDecorator extends Pokemon{
      */
     public int getNumAttackMenuItems(int atkType)
     {
-       return 3;
+       return pokemon.getNumAttackMenuItems(atkType);
     }
     /**
      * Get the string for the basic attacks that trainer chooses.
@@ -49,18 +49,7 @@ public abstract class PokemonDecorator extends Pokemon{
      */
     public String getAttackString(int atkType, int move)
     {
-    String atkStr= " ";
-
-      if(atkType == 1 && move == 1) {
-        atkStr = "uses Slam on ";
-        }
-      else if(atkType == 1 && move == 2) {
-        atkStr = "uses Tackle on ";
-        }
-      else if(atkType == 1 && move == 3) {
-        atkStr = "uses Punch on ";
-        }
-      return atkStr;
+        return pokemon.getAttackString(atkType, move);
     }
 
     /**
@@ -71,18 +60,7 @@ public abstract class PokemonDecorator extends Pokemon{
      */
     public int getAttackDamage(int atkType, int move)
     {
-      if(move == 1) {
-          return Rand.randIntRange(0, 5);
-      }
-
-      else if(move == 2) {
-          return Rand.randIntRange(2, 3);
-      }
-
-      else if(move == 3) {
-          return Rand.randIntRange(1, 4);
-      }
-      return 0;
+      return pokemon.getAttackDamage(atkType, move);
 }
 
     /**
@@ -92,12 +70,7 @@ public abstract class PokemonDecorator extends Pokemon{
      * @return damage multiplier or else returns 1 for basic attack which deals no multiplier.
      */
     public double getAttackMultiplier(Pokemon p, int atkType) {
-        double damageMultiplier;
-        if (atkType == 2) {
-            damageMultiplier = battleTable[this.getType()][p.getType()];
-            return damageMultiplier;
-        }
-        return 1 ;
+        return pokemon.getAttackMultiplier(p, atkType);
     }
 
     /**
@@ -107,14 +80,7 @@ public abstract class PokemonDecorator extends Pokemon{
      */
     @Override
     public int getAttackBonus(int atkType){
-        int attackBonus = 0;
-        if(atkType == 1) {
-            attackBonus = 1;
-        }
-        else if(atkType == 2){
-            attackBonus = 2;
-        }
-        return pokemon.getAttackBonus(atkType) + attackBonus;
+        return pokemon.getAttackBonus(atkType);
     }
 
     /**
@@ -123,6 +89,6 @@ public abstract class PokemonDecorator extends Pokemon{
      */
     public int getType()
     {
-        return super.getType();
+        return pokemon.getType();
     }
 }

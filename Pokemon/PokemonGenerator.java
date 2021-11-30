@@ -30,7 +30,7 @@ public class PokemonGenerator {
 
     public Pokemon generateRandomPokemon(int level) {
         Pokemon randomPokemon = null;
-        int randomPokemonChoice = Rand.randIntRange(0, pokemon.size());
+        int randomPokemonChoice = Rand.randIntRange(0, pokemon.size()-1);
         Object[] pokemonKey = pokemon.keySet().toArray(new String[0]);
         String randomPokemonName = (String) pokemonKey[randomPokemonChoice];
         String randomPokemonType = pokemon.get(randomPokemonName);
