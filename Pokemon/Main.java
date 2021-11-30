@@ -75,11 +75,10 @@ class Main {
         // Trainer to defeat Gym Leader by fighting with leader's pokemon.
         System.out.print("You have to defeat my pokemon! You don't have an option of throwing a pokeball or runningg away.");
 
-        Pokemon wildPokemon = PokemonGenerator.getInstance().generateRandomPokemon(level); ;
+        Pokemon wildPokemon = PokemonGenerator.getInstance().generateRandomPokemon(level);
         // Random Gym Leader's pokemon appears.
         System.out.println("Gym Leader's " + wildPokemon.getName() + " has appeared.");
-        int menuChoiceW = 0;
-        boolean isCaught = false;
+        int menuChoiceW;
         while(wildPokemon.getHp() != 0 ) {
           System.out.println("What do you want to do? \n"
                   + "1. Fight\n" + "2. Use Potion\n");
@@ -131,7 +130,7 @@ class Main {
       }
       // Encounter with wild pokemon - begins a fight.
       else if (encounter == 'w') {
-        Pokemon wildPokemon = PokemonGenerator.getInstance().generateRandomPokemon(level); ;
+        Pokemon wildPokemon = PokemonGenerator.getInstance().generateRandomPokemon(level);
         // Random wild pokemon appears.
         System.out.println("A wild " + wildPokemon.getName() + " has appeared.");
         int menuChoiceW = 0;
