@@ -30,7 +30,6 @@ public abstract class Pokemon extends Entity{
 
         return "1. Normal Attack \n2. Special Attack";
 
-
     }
 
     /**
@@ -49,7 +48,7 @@ public abstract class Pokemon extends Entity{
     public String getAttackMenu(int atkType)
     {
 
-      return "1. Slam \n2. Tackle \n3. Punch";
+        return "1. Slam \n2. Tackle \n3. Punch";
 
     }
 
@@ -64,26 +63,26 @@ public abstract class Pokemon extends Entity{
 
     public String attack(Pokemon p, int atkType, int move) {
 
-      int totalDmg = (int) (getAttackDamage(atkType, move) * getAttackMultiplier(p, atkType) + getAttackBonus(atkType));
-
-      return this.getName() + getAttackString(atkType, move) + p.getName() + "for " + totalDmg;
+        int totalDmg = (int) (getAttackDamage(atkType, move) * getAttackMultiplier(p, atkType) + getAttackBonus(atkType));
+        p.takeDamage(totalDmg);
+        return this.getName() + " " + this.getAttackString(atkType, move) + p.getName() + " for " + totalDmg;
 
     }
 
     public String getAttackString(int atkType, int move) {
-      String atk = " ";
+        String atk = " ";
 
-      if(move == 1) {
-        atk = "uses Slam on ";
-      }
-      else if(move == 2) {
-        atk = "uses Tackle on ";
-      }
-      else if(move == 3) {
-        atk = "uses Punch on ";
-      }
+        if(move == 1) {
+            atk = "uses Slam on ";
+        }
+        else if(move == 2) {
+            atk = "uses Tackle on ";
+        }
+        else if(move == 3) {
+            atk = "uses Punch on ";
+        }
 
-      return atk;
+        return atk;
     }
 
     public int getAttackDamage(int atkType, int move) {
