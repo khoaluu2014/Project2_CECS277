@@ -9,7 +9,7 @@
  */
 
 public abstract class PokemonDecorator extends Pokemon{
-    private Pokemon pokemon;
+    private final Pokemon pokemon;
 
     /**
      * Has instance of the base pokemon type. Calls in superclass Entity's constructor. Also passes in the extra
@@ -102,7 +102,7 @@ public abstract class PokemonDecorator extends Pokemon{
 
     /**
      * Gets the attack bonus depending on the type of attack, basic or special.
-     * @param atkType, integer for the typye of attack, basic = 1 or special = 2.
+     * @param atkType, integer for the typy of attack, basic = 1 or special = 2.
      * @return attackBonus to be added to the calculated damage.
      */
     @Override
@@ -115,5 +115,14 @@ public abstract class PokemonDecorator extends Pokemon{
             attackBonus = 2;
         }
         return pokemon.getAttackBonus(atkType) + attackBonus;
+    }
+
+    /**
+     * Gets the elemental type of pokemon which is either fire, water, or grass from superclass Pokemon.
+     * @return the type of pokemon.
+     */
+    public int getType()
+    {
+        return super.getType();
     }
 }
