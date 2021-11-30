@@ -123,19 +123,6 @@ public abstract class PokemonDecorator extends Pokemon{
      */
     public int getType()
     {
-        int type = -1;
-        if(this instanceof Fire)
-        {
-            type = 0;
-        }
-        else if(this instanceof Water)
-        {
-            type = 1;
-        }
-        else if(this instanceof Grass)
-        {
-            type = 2;
-        }
-        return type;
+        return super.getType();
     }
 }
