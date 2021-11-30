@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * given an initial amount of money, potions, and pokeballs. Trainer gets the map, the location on 
  * the map and the initial pokemon which is added to the pokemon list. Trainer moves depending on the 
  * choice of direction, the move is checked for validity and the location of trainer is updated.
- * @author Joshua Peng
+ * @author Joshua Peng, Khoa Luu
  */
 public class Trainer extends Entity{
   
@@ -17,29 +17,22 @@ public class Trainer extends Entity{
   private int potions;
   private int pokeballs;
   private Point loc;
-  private Map map;
-  private ArrayList<Pokemon> pokemon;
+  private ArrayList<Pokemon> pokemon = new ArrayList<>();
 
   /**
    * Creates a Trainer object with name n, object Pokemon p and object Map m as parameters.
    * @param n name of the Trainer.
-   * @param p pokemon that gets added to pokemon list .
-   * @param m map that shows location of trainer and his encounters.
+   * @param p pokemon that gets added to pokemon list.
    */
-  public Trainer(String n, Pokemon p, Map m){
-    /**
-     * Calls superclass Entity's constructor with matching parameters.
-	   * @param n name of trainer.
-	   * @param 25 initial hp value for the trainer.
-	   */
-    super(n,25);
-    map = m;
-    money = 10;
-    potions = 2;
-    pokeballs = 3;
-    pokemon = new ArrayList<Pokemon>();
-    pokemon.add(p);
-    loc =  m.findStart();
+  public Trainer(String n, Pokemon p){
+
+      super(n, 25, 25);
+      pokemon.add(p);
+      money = 5;
+      potions = 2;
+      pokeballs = 2;
+      loc = Map.getInstance().findStart();
+
   }
 
   /**
@@ -80,12 +73,7 @@ public class Trainer extends Entity{
    * @return  true or false.
    */
   public boolean hasPotion(){
-	  if (potions >= 1) {
-		  return true;
-	  }
-	  else {
-		  return false;
-	  }	  
+      return potions >= 1;
   }
 
   /**
@@ -131,23 +119,23 @@ public class Trainer extends Entity{
    * @return  true or false
    */
   public boolean catchPokemon(Pokemon p){
-	  if (hasPokeball()) {
-      int catchPercentage = Rand.randIntRange(0, p.getMaxHp());
-      pokeballs -= 1;
-      if(catchPercentage <= p.getMaxHp() - p.getHp())
-      {
-        pokemon.add(p);
-        return true;
-      }
-      else
-      {
+
+      if (hasPokeball()) {
+          int catchPercentage = Rand.randIntRange(0, p.getMaxHp());
+          pokeballs -= 1;
+          if(catchPercentage <= p.getMaxHp() - p.getHp())
+          {
+            pokemon.add(p);
+            return true;
+          }
+          else
+          {
+            return false;
+          }
+	  }
+      else {
         return false;
       }
-      		  
-	  }
-    else {
-      return false;
-    }
   }
   
   /**
@@ -165,12 +153,12 @@ public class Trainer extends Entity{
   // north - cannot go x < 0
   public char goNorth() {
       loc.translate(-1, 0);
-      if(map.getCharAtLoc(loc) == 'x')
+      if(Map.getInstance().getCharAtLoc(loc) == 'x')
       {
           loc.translate(1, 0);
           return 'x';
       }
-    return map.getCharAtLoc(loc);
+    return Map.getInstance().getCharAtLoc(loc);
   }
   
   /**
@@ -179,12 +167,12 @@ public class Trainer extends Entity{
    */
     public char goSouth() {
       loc.translate(1, 0);
-      if(map.getCharAtLoc(loc) == 'x')
+      if(Map.getInstance().getCharAtLoc(loc) == 'x')
       {
           loc.translate(-1, 0);
           return 'x';
       }
-	return map.getCharAtLoc(loc);
+	return Map.getInstance().getCharAtLoc(loc);
   }
   
   /**
@@ -193,12 +181,12 @@ public class Trainer extends Entity{
    */
   public char goEast(){
       loc.translate(0, 1);
-      if(map.getCharAtLoc(loc) == 'x')
+      if(Map.getInstance().getCharAtLoc(loc) == 'x')
       {
           loc.translate(0, -1);
           return 'x';
       }
-    return map.getCharAtLoc(loc);
+    return Map.getInstance().getCharAtLoc(loc);
   }
   
   /**
@@ -207,12 +195,12 @@ public class Trainer extends Entity{
    */
   public char goWest(){
       loc.translate(0, -1);
-      if(map.getCharAtLoc(loc) == 'x')
+      if(Map.getInstance().getCharAtLoc(loc) == 'x')
       {
           loc.translate(0, 1);
           return 'x';
       }
-	  return map.getCharAtLoc(loc); 
+	  return Map.getInstance().getCharAtLoc(loc);
 	  }	  
 
   /**
@@ -237,7 +225,20 @@ public class Trainer extends Entity{
       pokemon.get(i).heal();
     }
   }
- 
+
+  public void buffAllPokemon() {
+      for(int i = 0; i < pokemon.size(); i++)
+      {
+          PokemonGenerator.getInstance().addRandomBuff(pokemon.get(i));
+      }
+  }
+
+  public void debuffAllPokemon() {
+      for(int i = 0; i < pokemon.size(); i++)
+      {
+          PokemonGenerator.getInstance().addRandomDebuff(pokemon.get(i));
+      }
+  }
   /**
    * Gets the index of the pokemon from the list of pokemons. Trainer selects pokemon from the list 
    * to battle or to heal.
@@ -262,13 +263,17 @@ public class Trainer extends Entity{
     return pokemonList;
   }
 
+  public Pokemon removePokemon(int index) {
+      return pokemon.remove(index);
+  }
+
   /**
    * String representation of the Trainer Object. 
    * @return string summary of trainer's health, supplies and pokemons. 
    */
   @Override
   public String toString(){
-	  String str =  super.toString() + "\nMoney: " + money + "\nPotions: " + potions + "\nPoke Balls: " + pokeballs + "\n" + getPokemonList() + "\n" + map.mapToString(loc);
+	  String str =  super.toString() + "\nMoney: " + money + "\nPotions: " + potions + "\nPoke Balls: " + pokeballs + "\n" + getPokemonList() + "\n" + Map.getInstance().mapToString(loc);
     return str;
   }
 }
