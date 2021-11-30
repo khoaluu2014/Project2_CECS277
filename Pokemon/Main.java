@@ -73,13 +73,14 @@ class Main {
       // When Trainer reaches finish (f), it is blocked by Gym Leader who needs to be defeated for trainer to move up to next map.
       if (encounter == 'f') {
         // Trainer to defeat Gym Leader by fighting with leader's pokemon.
-        System.out.print("You have to defeat my pokemon! You don't have an option of throwing a pokeball or runningg away.");
+        System.out.print("You've entered the Gym! Defeat my pokemon to load next map!" + "\n" +
+                "There's no option of throwing a pokeball or running away.");
 
         Pokemon wildPokemon = PokemonGenerator.getInstance().generateRandomPokemon(level);
         // Random Gym Leader's pokemon appears.
-        System.out.println("Gym Leader's " + wildPokemon.getName() + " has appeared.");
+        System.out.println("\n\nGym Leader's " + wildPokemon.getName() + " has appeared.");
         int menuChoiceW;
-        while(wildPokemon.getHp() != 0 ) {
+        while(wildPokemon.getHp() > 0 ) {
           System.out.println("What do you want to do? \n"
                   + "1. Fight\n" + "2. Use Potion\n");
           menuChoiceW = CheckInput.getIntRange(1, 2);
@@ -103,6 +104,7 @@ class Main {
         }
         level +=1;
         mapNumber++;
+        System.out.println("\nYou defeated Gym Leader! Next map will load!\n");
         if(mapNumber > 3)
         {
           mapNumber = 1;
@@ -300,11 +302,11 @@ class Main {
 
       System.out.println(battlePokemon.getAttackMenu(choice));
       int move = CheckInput.getIntRange(1, battlePokemon.getNumAttackMenuItems(choice));
-      action += battlePokemon.attack(wild, choice, move) + "\n";
+      action += battlePokemon.attack(wild, choice-1, move) + "\n";
       //Wild Pokemon Turn
       int wildChoice = Rand.randIntRange(1, 2);
       int wildMove = Rand.randIntRange(1, 3);
-      action += wild.attack(battlePokemon, wildChoice, wildMove);
+      action += wild.attack(battlePokemon, wildChoice-1, wildMove);
     }
     System.out.println(action);
     System.out.println(wild);
