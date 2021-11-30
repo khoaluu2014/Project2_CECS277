@@ -33,6 +33,9 @@ public class Fire extends Pokemon{
 		if (atkType == 2) {
 			attackMenu = "1. Ember\n2. Fire Blast\n3. Fire Punch";
 		}
+		else {
+			return super.getAttackMenu(atkType);
+		}
 		return attackMenu;
 	}
 
@@ -46,6 +49,9 @@ public class Fire extends Pokemon{
 		int menuItems = 0;
 		if (atkType == 2) {
 			menuItems = 3;
+		}
+		else {
+			return super.getNumAttackMenuItems(atkType);
 		}
 		return menuItems;
 	}
@@ -75,6 +81,9 @@ public class Fire extends Pokemon{
 				atkStr = "uses FIRE PUNCH on ";
 			}
 		}
+		else {
+			super.getAttackString(atkType, move);
+		}
 		return atkStr;
 	}
 
@@ -103,6 +112,9 @@ public class Fire extends Pokemon{
 				damage = Rand.randIntRange(1, 4);
 			}
 		}
+		else {
+			return super.getAttackDamage(atkType, move);
+		}
 		return damage;
 	}
 
@@ -116,11 +128,11 @@ public class Fire extends Pokemon{
 		double damageMultiplier;
 		if (atkType == 2) {
 			damageMultiplier = battleTable[this.getType()][p.getType()];
-			return damageMultiplier;
+
 		}
 		else {
-			super.getAttackMultiplier(p, atkType);
+			return super.getAttackMultiplier(p, atkType);
 		}
-		return 1;
+		return damageMultiplier;
 	}
 }

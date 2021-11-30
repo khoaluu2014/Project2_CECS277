@@ -9,7 +9,7 @@ public class PokemonGenerator {
     private static PokemonGenerator instance = null;
 
     public PokemonGenerator() {
-        try(Scanner sc = new Scanner(new File("PokemonList.txt"))) {
+        try(Scanner sc = new Scanner(new File("Pokemon/PokemonList.txt"))) {
             while(sc.hasNextLine()) {
                 String[] line = sc.nextLine().split(",");
                 pokemon.put(line[0], line[1]);

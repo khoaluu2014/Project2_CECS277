@@ -11,6 +11,6 @@ public class AttackDown extends PokemonDecorator {
      */
     @Override
     public int getAttackBonus(int atkType){
-        return -(Rand.randIntRange(1,2));
+        return super.getAttackBonus(atkType)-1;
     }
 }

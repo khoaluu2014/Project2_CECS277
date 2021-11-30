@@ -85,10 +85,11 @@ public class Trainer extends Entity{
 
   /**
    * The trainer here then uses potions.
-   * @param pokeindex index of the pokemon the trainer's using on.
+   * @param pokeIndex index of the pokemon the trainer's using on.
    */
-  public void usePotion(int pokeindex){
-          getPokemon(pokeindex).heal();
+  public void usePotion(int pokeIndex){
+          getPokemon(pokeIndex).heal();
+          pokemon.set(pokeIndex, PokemonGenerator.getInstance().addRandomBuff(getPokemon(pokeIndex)));
           potions--;
   }
 
@@ -125,12 +126,18 @@ public class Trainer extends Entity{
           pokeballs -= 1;
           if(catchPercentage <= p.getMaxHp() - p.getHp())
           {
-            pokemon.add(p);
-            return true;
+              pokemon.add(p);
+              while(pokemon.size() > 6) {
+                  System.out.println("You have too many pokemons, please say goodbye to one.");
+                  getPokemonList();
+                  int choice = CheckInput.getIntRange(1, pokemon.size());
+                  removePokemon(choice);
+              }
+              return true;
           }
           else
           {
-            return false;
+              return false;
           }
 	  }
       else {
@@ -222,21 +229,21 @@ public class Trainer extends Entity{
   public void healAllPokemon(){
 	  for(int i = 0; i < pokemon.size(); i++)
     {
-      pokemon.get(i).heal();
+      getPokemon(i).heal();
     }
   }
 
   public void buffAllPokemon() {
       for(int i = 0; i < pokemon.size(); i++)
       {
-          PokemonGenerator.getInstance().addRandomBuff(pokemon.get(i));
+          pokemon.set(i, PokemonGenerator.getInstance().addRandomBuff(getPokemon(i)));
       }
   }
 
   public void debuffAllPokemon() {
       for(int i = 0; i < pokemon.size(); i++)
       {
-          PokemonGenerator.getInstance().addRandomDebuff(pokemon.get(i));
+          pokemon.set(i, PokemonGenerator.getInstance().addRandomDebuff(getPokemon(i)));
       }
   }
   /**

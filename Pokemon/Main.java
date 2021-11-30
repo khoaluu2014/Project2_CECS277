@@ -19,6 +19,7 @@ class Main {
     char encounter = '\0'; 
     int menuChoice = 0;
     int mapNumber = 1;
+    int level = 0;
     System.out.print("Prof. Oak: Hello there new trainer, what is your name?\n");
     String name = CheckInput.getString();
     // Display menu and ask player to choose pokemon.
@@ -31,19 +32,19 @@ class Main {
     Pokemon poke;
     if(pokemonChoice == 1)
     {
-      poke = new Charmander();
+      poke = PokemonGenerator.getInstance().getPokemon("Charmander");
     }
     else if(pokemonChoice == 2)
     {
-      poke = new Bulbasaur();
+      poke = PokemonGenerator.getInstance().getPokemon("Bulbasaur");
     }
     else
     {
-      poke = new Squirtle();
+      poke = PokemonGenerator.getInstance().getPokemon("Squirtle");
     }
     // Load map and trainer.
     m.loadMap(1);
-    Trainer trainer = new Trainer(name, poke, m);
+    Trainer trainer = new Trainer(name, poke);
     // Load main menu.
     while (menuChoice != 5 && trainer.getHp() > 0) {
       System.out.println(trainer);
@@ -99,7 +100,7 @@ class Main {
       }
       // Encounter with wild pokemon - begins a fight.
       else if (encounter == 'w') {
-        Pokemon wildPokemon = chooseRandomPokemon() ;
+        Pokemon wildPokemon = PokemonGenerator.getInstance().generateRandomPokemon(level); ;
         // Random wild pokemon appears.
         System.out.println("A wild " + wildPokemon.getName() + " has appeared.");
         int menuChoiceW = 0;
@@ -218,32 +219,6 @@ class Main {
                       + "4. Go West\n" + "5. Quit");
     return CheckInput.getIntRange(1,5);
   }
-  
-  /**
-   * Adds new instances of Pokemons to arraylist wildPokemon and generates a random number. 
-   * Calls method get() and passes random number as parameter to get the wild pokemon. 
-   * @return wild pokemon that matches the random number. 
-   */
-  public static Pokemon chooseRandomPokemon() 
-  {
-    ArrayList<Pokemon> wildPokemon = new ArrayList<>();
-    Pokemon wpoke1 = new Charmander();
-    Pokemon wpoke2 = new Ponyta();
-    Pokemon wpoke3 = new Bulbasaur();
-    Pokemon wpoke4 = new Oddish();
-    Pokemon wpoke5 = new Squirtle();
-    Pokemon wpoke6 = new Staryu();
-
-    wildPokemon.add(wpoke1);
-    wildPokemon.add(wpoke2);
-    wildPokemon.add(wpoke3);
-    wildPokemon.add(wpoke4);
-    wildPokemon.add(wpoke5);
-    wildPokemon.add(wpoke6);
-
-    int randomPokemon = Rand.randIntRange(1, 5);
-    return wildPokemon.get(randomPokemon);
-  }
 
   /**
    * Keeps track of the health points for the trainer and the wild pokemons, and prints messages
@@ -271,7 +246,7 @@ class Main {
     else
     {
       System.out.println(wild);
-      System.out.println("Choose a Pokemon: \n" + t.getPokemonList());
+      System.out.println("Choose a Pokemon \n" + t.getPokemonList());
       int pokemonChoice = CheckInput.getIntRange(1, t.getNumPokemon());
       Pokemon battlePokemon = t.getPokemon(pokemonChoice-1);
       while(battlePokemon.getHp() == 0)
@@ -281,31 +256,16 @@ class Main {
         battlePokemon = t.getPokemon(pokemonChoice-1);
       }
       System.out.println(battlePokemon.getName() + ", I choose you!");
-      System.out.println(battlePokemon.getBasicMenu());
-      int choice = CheckInput.getIntRange(1, battlePokemon.getNumBasicMenuItems());
-      if(choice == 1)
-      {
-        System.out.println(battlePokemon.getAttackMenu(choice));
-        int move = CheckInput.getIntRange(1, battlePokemon.getNumAttackMenuItems(choice));
-        action += battlePokemon.basicAttack(wild, move);
-      }
-      else if(choice == 2)
-      {
-        System.out.println(battlePokemon.getSpecialMenu());
-        int move = CheckInput.getIntRange(1, battlePokemon.getNumSpecialMenuItems());
-        action = battlePokemon.specialAttack(wild, move);
-      }
+      System.out.println(battlePokemon.getAttackTypeMenu());
+      int choice = CheckInput.getIntRange(1, battlePokemon.getNumAttackTypeMenuItems());
+
+      System.out.println(battlePokemon.getAttackMenu(choice));
+      int move = CheckInput.getIntRange(1, battlePokemon.getNumAttackMenuItems(choice));
+      action += battlePokemon.attack(wild, choice, move) + "\n";
       //Wild Pokemon Turn
       int wildChoice = Rand.randIntRange(1, 2);
       int wildMove = Rand.randIntRange(1, 3);
-      if(wildChoice == 1)
-      {
-        action += "\n" + wild.basicAttack(battlePokemon, wildMove);
-      }
-      else if(wildChoice == 2)
-      {
-        action += "\n" + wild.specialAttack(battlePokemon, wildMove);
-      }
+      action += wild.attack(battlePokemon, wildChoice, wildMove);
     }
     System.out.println(action);
     System.out.println(wild);
