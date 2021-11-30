@@ -76,7 +76,7 @@ class Main {
         // Trainer to defeat Gym Leader by fighting with leader's pokemon.
         System.out.print("You have to defeat my pokemon! You don't have an option of throwing a pokeball or runningg away.");
 
-        Pokemon wildPokemon = chooseRandomPokemon() ;
+        Pokemon wildPokemon = PokemonGenerator.getInstance().generateRandomPokemon(level); ;
         // Random Gym Leader's pokemon appears.
         System.out.println("Gym Leader's " + wildPokemon.getName() + " has appeared.");
         int menuChoiceW = 0;
