@@ -47,6 +47,11 @@ class Main {
     Trainer trainer = new Trainer(name, poke);
     // Load main menu.
     while (menuChoice != 5 && trainer.getHp() > 0) {
+      int hpSum = 0;
+      for(int i = 0; i < trainer.getNumPokemon(); i++)
+      {
+        hpSum += trainer.getPokemon(i).getHp();
+      }
       System.out.println(trainer);
       menuChoice = mainMenu();
       if (menuChoice == 1){
@@ -79,7 +84,7 @@ class Main {
         // Random Gym Leader's pokemon appears.
         System.out.println("Gym Leader's " + wildPokemon.getName() + " has appeared.");
         int menuChoiceW;
-        while(wildPokemon.getHp() != 0 ) {
+        while(wildPokemon.getHp() != 0 && hpSum != 0) {
           System.out.println("What do you want to do? \n"
                   + "1. Fight\n" + "2. Use Potion\n");
           menuChoiceW = CheckInput.getIntRange(1, 2);
@@ -107,7 +112,13 @@ class Main {
         {
           mapNumber = 1;
         }
-        m.loadMap(mapNumber);
+        if(wildPokemon.getHp() == 0) {
+          m.loadMap(mapNumber);
+        }
+        else {
+          System.out.println("All your pokemon are downed. You take damage for them. Try again next time.");
+          trainer.takeDamage(5);
+        }
       }
       else if (encounter == 'n') { // No encounter found.
         System.out.println("There is nothing here!");
@@ -144,7 +155,7 @@ class Main {
           trainer.debuffAllPokemon();
           System.out.println("The wild Pokemon has intimidated your Pokemons.");
         }
-        while(menuChoiceW != 4 && wildPokemon.getHp() > 0 && !isCaught) {
+        while(menuChoiceW != 4 && wildPokemon.getHp() > 0 && hpSum > 0 &&!isCaught) {
         System.out.println("What do you want to do? \n"
                   + "1. Fight\n" + "2. Use Potion\n" + "3. Throw Poke Ball\n" 
                   + "4. Run Away");
@@ -193,9 +204,13 @@ class Main {
           }
         }
         // Run away. Trainer leaves the fight but 'w' is not removed from map.
-        if(menuChoiceW != 4)
+        if(wildPokemon.getHp() == 0)
         {
           m.removeCharAtLoc(trainer.getLocation());
+        }
+        else if(hpSum == 0) {
+          System.out.println("All your pokemons are downed. You take damage instead.");
+          trainer.takeDamage(3);
         }
       }  
       else if (encounter == 'p') {  
@@ -271,19 +286,8 @@ class Main {
   public static void trainerAttack(Trainer t, Pokemon wild)
   {
     int d = Rand.randIntRange(1,3);
-    int hpSum = 0;
     String action = "";
-    for(int i = 0; i < t.getNumPokemon(); i++)
-    {
-      hpSum += t.getPokemon(i).getHp();
-    } 
-    if(hpSum == 0)
-    {
-      action += "All of your pokemon are downed. So you're taking the damage instead.";
-      t.takeDamage(d);
-    }
-    else
-    {
+
       System.out.println(wild);
       System.out.println("Choose a Pokemon \n" + t.getPokemonList());
       int pokemonChoice = CheckInput.getIntRange(1, t.getNumPokemon());
@@ -305,7 +309,7 @@ class Main {
       int wildChoice = Rand.randIntRange(1, 2);
       int wildMove = Rand.randIntRange(1, 3);
       action += wild.attack(battlePokemon, wildChoice, wildMove);
-    }
+
     System.out.println(action);
     System.out.println(wild);
   }
