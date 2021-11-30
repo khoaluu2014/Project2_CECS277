@@ -20,6 +20,9 @@ public class Water extends Pokemon{
     if(atkType == 2) {
       atkMenu = "1. Water Gun \n2. Bubble Beam \n3. Waterfall";
     }
+    else {
+      return super.getAttackMenu(atkType);
+    }
     return atkMenu;
   }
 
@@ -42,6 +45,9 @@ public class Water extends Pokemon{
         atk = " uses WATERFALL on ";
       }
     }
+    else {
+      return super.getAttackString(atkType, move);
+    }
     return atk;
   }
 
@@ -58,6 +64,9 @@ public class Water extends Pokemon{
       else if(move == 3) {
         dmg = Rand.randIntRange(0, 5);
       }
+    }
+    else {
+      return super.getAttackDamage(atkType, move);
     }
     return dmg;
   }
