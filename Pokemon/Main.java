@@ -19,6 +19,7 @@ class Main {
     char encounter = '\0'; 
     int menuChoice = 0;
     int mapNumber = 1;
+    int level = 1;
     System.out.print("Prof. Oak: Hello there new trainer, what is your name?\n");
     String name = CheckInput.getString();
     // Display menu and ask player to choose pokemon.
@@ -69,44 +70,39 @@ class Main {
       }  
       if (menuChoice != 5){    
       // Trainer has different encounters depending on his/her position on the map.
-      // When Trainer reaches finish(f), it is blocked by Gym Leader who needs to be defeated to move to next map.
+      // When Trainer reaches finish (f), it is blocked by Gym Leader who needs to be defeated for trainer to move up to next map.
       if (encounter == 'f') {
         // Trainer to defeat Gym Leader by fighting with leader's pokemon.
         System.out.print("You have to defeat my pokemon! You don't have an option of throwing a pokeball or runningg away.");
+
         Pokemon wildPokemon = chooseRandomPokemon() ;
         // Random Gym Leader's pokemon appears.
         System.out.println("Gym Leader's " + wildPokemon.getName() + " has appeared.");
         int menuChoiceW = 0;
         boolean isCaught = false;
-        while(wildPokemon.getHp() > 0 && trainer.getHp() > ) {
+        while(wildPokemon.getHp() != 0 ) {
           System.out.println("What do you want to do? \n"
                   + "1. Fight\n" + "2. Use Potion\n");
-          menuChoiceW = CheckInput.getIntRange(1,2);
+          menuChoiceW = CheckInput.getIntRange(1, 2);
           if (menuChoiceW == 1) {
             // Fight.
             trainerAttack(trainer, wildPokemon);
-          }
-          else if (menuChoiceW == 2) {
+          } else if (menuChoiceW == 2) {
             // Use Potion.
-            if(trainer.hasPokeball())
-            {
+            if (trainer.hasPokeball()) {
               System.out.println("Which pokemon do you want to heal?\n" + trainer.getPokemonList());
               int potionChoice = CheckInput.getIntRange(1, trainer.getNumPokemon());
-              if (trainer.getPokemon(potionChoice - 1).getHp() > 0)
-              {
+              if (trainer.getPokemon(potionChoice - 1).getHp() > 0) {
                 trainer.usePotion(potionChoice - 1);
-              }
-              else
-              {
+              } else {
                 System.out.println("You can't revive downed Pokemons.");
               }
-            }
-            else
-            {
+            } else {
               System.out.println("You don't have any potions.");
             }
           }
-
+        }
+        level +=1;
         mapNumber++;
         if(mapNumber > 3)
         {
