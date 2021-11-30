@@ -114,6 +114,6 @@ public abstract class PokemonDecorator extends Pokemon{
         else if(atkType == 2){
             attackBonus = 2;
         }
-        return attackBonus;
+        return pokemon.getAttackBonus(atkType) + attackBonus;
     }
 }

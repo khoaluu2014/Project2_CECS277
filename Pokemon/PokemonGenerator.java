@@ -9,7 +9,7 @@ public class PokemonGenerator {
     private static PokemonGenerator instance = null;
 
     public PokemonGenerator() {
-        try(Scanner sc = new Scanner(new File("PokemonList.txt"))) {
+        try(Scanner sc = new Scanner(new File("Pokemon/PokemonList.txt"))) {
             while(sc.hasNextLine()) {
                 String[] line = sc.nextLine().split(",");
                 pokemon.put(line[0], line[1]);
@@ -71,10 +71,10 @@ public class PokemonGenerator {
     public Pokemon addRandomBuff(Pokemon p) {
         int randomBuff = Rand.randIntRange(1, 2);
         if(randomBuff == 1) {
-            p.AttackUp();
+            p = new AttackUp(p);
         }
         else if(randomBuff == 2) {
-            p.HpUp();
+            p = new HpUp(p);
         }
         return p;
     }
@@ -83,10 +83,10 @@ public class PokemonGenerator {
         int randomDebuff = Rand.randIntRange(1, 2);
 
         if(randomDebuff == 1) {
-            p.AttackDown();
+            p = new AttackDown(p);
         }
         else if(randomDebuff == 2) {
-            p.HpDown();
+            p = new HpDown(p);
         }
 
         return p;

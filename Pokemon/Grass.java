@@ -20,6 +20,9 @@ public class Grass extends Pokemon{
     if(atkType == 2) {
       atkMenu = "1. Vine Whip \n2. Razor Leaf \n3. Solar Beam";
     }
+    else {
+      return super.getAttackMenu(atkType);
+    }
     return atkMenu;
   }
 
@@ -42,6 +45,9 @@ public class Grass extends Pokemon{
         atk = " uses SOLAR BEAM on ";
       }
     }
+    else {
+      return super.getAttackString(atkType, move);
+    }
     return atk;
   }
 
@@ -59,6 +65,9 @@ public class Grass extends Pokemon{
         dmg = Rand.randIntRange(0, 5);
       }
     }
+    else {
+      return super.getAttackDamage(atkType, move);
+    }
     return dmg;
   }
 
@@ -69,7 +78,7 @@ public class Grass extends Pokemon{
       multiplier = battleTable[this.getType()][p.getType()];
     }
     else {
-      super.getAttackMultiplier(p, atkType);
+      return super.getAttackMultiplier(p, atkType);
     }
     return multiplier;
   }
