@@ -72,16 +72,16 @@ public abstract class PokemonDecorator extends Pokemon{
     public int getAttackDamage(int atkType, int move)
     {
       if(move == 1) {
-        return Rand.randIntRange(0, 5);
-        }
+          return Rand.randIntRange(0, 5);
+      }
 
       else if(move == 2) {
-        return Rand.randIntRange(2, 3);
-        }
+          return Rand.randIntRange(2, 3);
+      }
 
       else if(move == 3) {
-        return Rand.randIntRange(1, 4);
-        }
+          return Rand.randIntRange(1, 4);
+      }
       return 0;
 }
 

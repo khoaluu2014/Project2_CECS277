@@ -78,7 +78,7 @@ public class Water extends Pokemon{
       multiplier = battleTable[this.getType()][p.getType()];
     }
     else {
-      super.getAttackMultiplier(p, atkType);
+      return super.getAttackMultiplier(p, atkType);
     }
     return multiplier;
   }

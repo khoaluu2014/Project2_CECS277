@@ -82,7 +82,7 @@ public class Fire extends Pokemon{
 			}
 		}
 		else {
-			super.getAttackString(atkType, move);
+			return super.getAttackString(atkType, move);
 		}
 		return atkStr;
 	}

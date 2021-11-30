@@ -3,9 +3,6 @@
 */
 
 /**
- * Interface Grass is implemented by Bulbasaur and Oddish Class and specifies that the pokemons are of grass type.
- * It gives special funcionalities and abilities to pokemons Bulbasaur and Oddish through the special attacks
- * methods. 
  * @author Khoa Luu
  */
 public class Grass extends Pokemon{
