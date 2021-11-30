@@ -20,7 +20,6 @@ class Main {
     int menuChoice = 0;
     int mapNumber = 1;
     int level = 0;
-    main
     System.out.print("Prof. Oak: Hello there new trainer, what is your name?\n");
     String name = CheckInput.getString();
     // Display menu and ask player to choose pokemon.
