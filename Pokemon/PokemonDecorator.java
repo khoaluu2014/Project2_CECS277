@@ -120,4 +120,26 @@ public abstract class PokemonDecorator extends Pokemon{
         }
         return attackBonus;
     }
+
+    /**
+     * Gets the elemental type of pokemon which is either fire, water, or grass.
+     * @return the type of pokemon.
+     */
+    public int getType()
+    {
+        int type = -1;
+        if(this instanceof Fire)
+        {
+            type = 0;
+        }
+        else if(this instanceof Water)
+        {
+            type = 1;
+        }
+        else if(this instanceof Grass)
+        {
+            type = 2;
+        }
+        return type;
+    }
 }
