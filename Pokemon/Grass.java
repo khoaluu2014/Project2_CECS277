@@ -6,6 +6,12 @@
  * @author Khoa Luu
  */
 public class Grass extends Pokemon{
+  /**
+   * Calls super class for Grass method
+   * @param n, name of trainer, trainer's pokemons  or wild pokemons.
+   * @param h, current health points for trainer and the pokemons.
+   * @param m, maximum health points allowed for trainer or pokemons.
+   */
 
   public Grass(String n, int h, int m) {
     super(n, h, m);

@@ -27,7 +27,7 @@ public abstract class Entity {
 
   /**
    * Gets the trainer's or pokemon's health points.
-   * return@ hp which is trainer's or pokemon's current health points.
+   * @return hp which is trainer's or pokemon's current health points.
    */
   public int getHp(){
     return hp;
@@ -35,7 +35,7 @@ public abstract class Entity {
 
   /**
    * Gets the trainer's or pokemon's maximum health points allowed.
-   * return@ maxHp which is trainer's or pokemon's maximum health points allowed.
+   * @return maxHp which is trainer's or pokemon's maximum health points allowed.
    */
   public int getMaxHp(){
     return maxHp;
@@ -67,7 +67,7 @@ public abstract class Entity {
 
   /**
    * Gets the trainer's or pokemon's name.
-   * return@ name of trainer or pokemon.
+   * @return name of trainer or pokemon.
    */
   public String getName(){
     return name;

@@ -145,6 +145,7 @@ class Main {
       }
       // Encounter with wild pokemon - begins a fight.
       else if (encounter == 'w') {
+        // Wild pokemon is generated and decorated with random buffs according to pokemon's level.
         Pokemon wildPokemon = PokemonGenerator.getInstance().generateRandomPokemon(level);
         // Random wild pokemon appears.
         System.out.println("A wild " + wildPokemon.getName() + " has appeared.");
@@ -288,8 +289,8 @@ class Main {
    * for attacks. Each attack, basic or special, has a menu for the types of attacks that trainer 
    * can choose from. basicAttack() or specialAttack() methods are called and the descriptions of
    * the attacks are printed out.
-   * @param t trainer who encounters the wild pokemon.
-   * @param wild wild pokemon that appears when trainer encouter 'w' in map.
+   * @param t, trainer who encounters the wild pokemon.
+   * @param wild, wild pokemon that appears when trainer encouter 'w' in map.
    */
   public static Pokemon trainerAttack(Trainer t, Pokemon wild)
   {
@@ -299,12 +300,12 @@ class Main {
       System.out.println(wild);
       System.out.println("Choose a Pokemon \n" + t.getPokemonList());
       int pokemonChoice = CheckInput.getIntRange(1, t.getNumPokemon());
-      Pokemon battlePokemon = t.getPokemon(pokemonChoice-1);
+      Pokemon battlePokemon = t.getPokemon(pokemonChoice);
       while(battlePokemon.getHp() == 0)
       {
         System.out.println("It's downed. Please choose another one.");
         pokemonChoice = CheckInput.getIntRange(1, t.getNumPokemon());
-        battlePokemon = t.getPokemon(pokemonChoice-1);
+        battlePokemon = t.getPokemon(pokemonChoice);
       }
       System.out.println(battlePokemon.getName() + ", I choose you!");
       System.out.println(battlePokemon.getAttackTypeMenu());
