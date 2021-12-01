@@ -17,7 +17,7 @@ public abstract class Entity {
    * Creates an Entity object with name n and maximum health points mHp as parameters
    * @param n, name of trainer, trainer's pokemons  or wild pokemons.
    * @param h, current health points for trainer and the pokemons.
-   * @param mHp, maximum health points allowed for trainer or pokemons.
+   * @param m, maximum health points allowed for trainer or pokemons.
    */
   public Entity(String n, int h, int m){
     name = n;
@@ -48,7 +48,7 @@ public abstract class Entity {
    * @param d damage that a pokeman or trainer takes.
    */
   public void takeDamage(int d){
-    if(hp > 0){
+    if(hp >= d){
       hp -= d;
     }
     else{
@@ -80,9 +80,9 @@ public abstract class Entity {
   @Override
   public String toString(){
     //add name of pokemon between Name and HP
-    String toString = name + " HP: " + hp + "/" + maxHp;
+    return name + " HP: " + hp + "/" + maxHp;
 
-    return toString;
+
   }
 
 }

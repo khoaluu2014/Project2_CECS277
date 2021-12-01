@@ -84,9 +84,13 @@ class Main {
         // Random Gym Leader's pokemon appears.
         System.out.println("Gym Leader's " + wildPokemon.getName() + " has appeared.");
         int menuChoiceW;
-        while(wildPokemon.getHp() != 0 && hpSum != 0) {
+        while(wildPokemon.getHp() != 0 && hpSum > 0) {
           System.out.println("What do you want to do? \n"
                   + "1. Fight\n" + "2. Use Potion\n");
+          for(int i = 0; i < trainer.getNumPokemon(); i++)
+          {
+            hpSum += trainer.getPokemon(i).getHp();
+          }
           menuChoiceW = CheckInput.getIntRange(1, 2);
           if (menuChoiceW == 1) {
             // Fight.
@@ -159,6 +163,10 @@ class Main {
         System.out.println("What do you want to do? \n"
                   + "1. Fight\n" + "2. Use Potion\n" + "3. Throw Poke Ball\n" 
                   + "4. Run Away");
+        for(int i = 0; i < trainer.getNumPokemon(); i++)
+        {
+           hpSum += trainer.getPokemon(i).getHp();
+        }
         menuChoiceW = CheckInput.getIntRange(1,4);
         if (menuChoiceW == 1) { 
           // Fight.
@@ -283,7 +291,7 @@ class Main {
    * @param t trainer who encounters the wild pokemon.
    * @param wild wild pokemon that appears when trainer encouter 'w' in map.
    */
-  public static void trainerAttack(Trainer t, Pokemon wild)
+  public static Pokemon trainerAttack(Trainer t, Pokemon wild)
   {
     int d = Rand.randIntRange(1,3);
     String action = "";
@@ -312,6 +320,7 @@ class Main {
 
     System.out.println(action);
     System.out.println(wild);
+    return battlePokemon;
   }
 
   /**
