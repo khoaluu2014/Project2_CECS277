@@ -4,10 +4,20 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * PokemonGenerator is a singleton that generates random or specific pokemon & randomly chooses a buff or debuff
+ * to apply to a pokemon.
+ */
 public class PokemonGenerator {
+    // Other data member of class. Initializes the Hashmap to store pokemon names and types.
     private HashMap<String, String> pokemon = new HashMap<>();
+    // Single PokemonGenerator instance.
     private static PokemonGenerator instance = null;
 
+    /**
+     * Reads a pokemon list file into a HashMap to store different pokemon names and their associated
+     * elemental type.
+     */
     public PokemonGenerator() {
         try(Scanner sc = new Scanner(new File("Pokemon/PokemonList.txt"))) {
             while(sc.hasNextLine()) {
@@ -19,6 +29,10 @@ public class PokemonGenerator {
         }
     }
 
+    /**
+     * Gets single PokemonGenerator instance.
+     * @return static PokemonGenerator object.
+     */
     public static PokemonGenerator getInstance() {
         if(instance != null) {
             return instance;
@@ -28,6 +42,12 @@ public class PokemonGenerator {
         }
     }
 
+    /**
+     * The generateRandomPokemon randomly selects a pokemon from the hashmap and construct a pokemon of the corresponding
+     * elemental base type. If level > 1, tt also decorates pokemon with a random buff for each level greater than one.
+     * @param level, level for the pokemon.
+     * @return random pokemon.
+     */
     public Pokemon generateRandomPokemon(int level) {
         Pokemon randomPokemon = null;
         int randomPokemonChoice = Rand.randIntRange(0, pokemon.size()-1);
@@ -44,14 +64,17 @@ public class PokemonGenerator {
         else if(randomPokemonType.equalsIgnoreCase("Grass")) {
             randomPokemon = new Grass(randomPokemonName, 25, 25);
         }
-
         for(int i = 0; i < level; i++) {
             addRandomBuff(randomPokemon);
         }
-
         return randomPokemon;
-
     }
+
+    /**
+     * The getPokemon method passes in a string with name of pokemon and constructs an object of corresponding type.
+     * @param name of pokemon
+     * @return object of corresponding type of pokemon
+     */
 
     public Pokemon getPokemon(String name) {
         String pokemonType = pokemon.get(name);
@@ -68,6 +91,11 @@ public class PokemonGenerator {
         return poke;
     }
 
+    /**
+     * Randomly chooses the type of buff for the pokemon. Calls in either AttackUp or HpUp methods.
+     * @param p, pokemon
+     * @return type of buff
+     */
     public Pokemon addRandomBuff(Pokemon p) {
         int randomBuff = Rand.randIntRange(1, 2);
         if(randomBuff == 1) {
@@ -79,6 +107,11 @@ public class PokemonGenerator {
         return p;
     }
 
+    /**
+     * Randomly chooses the type of debuff for the pokemon. Calls in either AttackDown or HpDown methods.
+     * @param p, pokemon
+     * @return type of debuff
+     */
     public Pokemon addRandomDebuff(Pokemon p) {
         int randomDebuff = Rand.randIntRange(1, 2);
 
@@ -88,7 +121,6 @@ public class PokemonGenerator {
         else if(randomDebuff == 2) {
             p = new HpDown(p);
         }
-
         return p;
     }
 

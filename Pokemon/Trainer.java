@@ -117,6 +117,7 @@ public class Trainer extends Entity{
   /**
    * Checks if trainer has pokeballs to catch pokemons and calculate the percent chance of catching the pokemon. 
    * Pokemon is caught and added to pokemon list if catch percentage is equal or less than difference of MaxHp and Hp.
+   * @param p, type of pokemon
    * @return  true or false
    */
   public boolean catchPokemon(Pokemon p){
@@ -233,6 +234,9 @@ public class Trainer extends Entity{
     }
   }
 
+    /**
+     * Pokemons are buffed to increase their stats.
+     */
   public void buffAllPokemon() {
       for(int i = 0; i < pokemon.size(); i++)
       {
@@ -240,6 +244,9 @@ public class Trainer extends Entity{
       }
   }
 
+    /**
+     * Pokemons are debuffed to decrease their stats.
+     */
   public void debuffAllPokemon() {
       for(int i = 0; i < pokemon.size(); i++)
       {
@@ -270,6 +277,11 @@ public class Trainer extends Entity{
     return pokemonList;
   }
 
+    /**
+     * Remove Pokemon from the index list if list is greater than 6.
+     * @param index, index number that corresponds to pokemon.
+     * @return the pokemon removed from the index list.
+     */
   public Pokemon removePokemon(int index) {
       return pokemon.remove(index);
   }

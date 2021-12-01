@@ -26,7 +26,7 @@ public abstract class PokemonDecorator extends Pokemon{
 
     /**
      * Gets the menu for the basic attacks by returning the string with the menu choices.
-     * return@ string menu for basic attacks..
+     * return@ string menu for basic attacks.
      */
     public String getAttackMenu(int atkType)
     {
@@ -75,7 +75,7 @@ public abstract class PokemonDecorator extends Pokemon{
 
     /**
      * Gets the attack bonus depending on the type of attack, basic or special.
-     * @param atkType, integer for the typye of attack, basic = 1 or special = 2.
+     * @param atkType, trainer chooses between basic attack (1) or special attack (2).
      * @return attackBonus to be added to the calculated damage.
      */
     @Override

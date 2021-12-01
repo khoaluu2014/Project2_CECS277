@@ -3,7 +3,7 @@
 */
 
 /**
- * Fire class is a type of base pokemon with special functionalities and abilities.It inherits
+ * Fire class is a type of base pokemon with special functionalities and abilities. It inherits
  * variables and methods from Pokemon class.
  * @author Joshua Peng
  */
@@ -13,9 +13,9 @@ public class Fire extends Pokemon{
 	/**
 	 * Creates a Fire type base object and passes in name of pokemon, hp and max hp as parameters.
 	 * Calls in superclass Pokemon's constructor.
-	 * @param n, name of pokemon.
-	 * @param h, hp for pokemon.
-	 * @param m, maximum Hp for pokemon.
+	 * @param n, name of fire pokemon.
+	 * @param h, hp for fire pokemon.
+	 * @param m, maximum Hp for fire pokemon.
 	 */
 	public Fire(String n, int h, int m)
 	{
@@ -91,7 +91,7 @@ public class Fire extends Pokemon{
 	 * Gets a random damage from a range which is based on the type of move.
 	 * @param atkType, trainer chooses between basic attack (1)  or special attack (2).
 	 * @param move, the move that the Trainer chooses.
-	 * @return the damage amount for the move
+	 * @return the damage amount for the move.
 	 */
 	@Override
 	public int getAttackDamage(int atkType, int move)

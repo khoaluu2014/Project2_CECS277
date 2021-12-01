@@ -22,14 +22,15 @@ public abstract class Pokemon extends Entity{
      * Create a Pokemon object with passed in properties.
      */
     public Pokemon(String n, int h, int m) {
-
       super(n, h, m);
     }
 
+    /**
+     *
+     * @return String menu for atkType menu
+     */
     public String getAttackTypeMenu() {
-
         return "1. Normal Attack \n2. Special Attack";
-
     }
 
     /**
@@ -43,17 +44,17 @@ public abstract class Pokemon extends Entity{
 
     /**
      * Prints out basic attack menu.
+     * @param atkType, trainer chooses between basic attack (1) or special attack (2).
      * @return basic attack menu.
      */
     public String getAttackMenu(int atkType)
     {
-
         return "1. Slam \n2. Tackle \n3. Punch";
-
     }
 
     /**
      * Gets the number of trainer's choice of either basic attack or special attack.
+     * @param atkType, trainer chooses between basic attack (1) or special attack (2).
      * @return the number of choices of attack.
      */
     public int getNumAttackMenuItems(int atkType)
@@ -61,14 +62,26 @@ public abstract class Pokemon extends Entity{
       return 3;
     }
 
+    /**
+     * Calculates total damage for defending and attacking pokemon  & builds the full attack string.
+     * @param p, pokemon
+     * @param atkType, trainer chooses between basic attack (1) or special attack (2).
+     * @param move, type of attack move trainer selects
+     * @return string summary of the attack and damage.
+     */
     public String attack(Pokemon p, int atkType, int move) {
-
         int totalDmg = (int) (getAttackDamage(atkType, move) * getAttackMultiplier(p, atkType) + getAttackBonus(atkType));
         p.takeDamage(totalDmg);
         return this.getName() + " " + this.getAttackString(atkType, move) + p.getName() + " for " + totalDmg;
-
     }
 
+    /**
+     * Returns the partial string for the chosen move, which is overriden in the base pokemon classes for special
+     * element attacks
+     * @param atkType, trainer chooses between basic attack or special attack.
+     * @param move, the move that trainer chooses.
+     * @return String for the chosen attack move.
+     */
     public String getAttackString(int atkType, int move) {
         String atk = " ";
 
@@ -81,10 +94,16 @@ public abstract class Pokemon extends Entity{
         else if(move == 3) {
             atk = "uses Punch on ";
         }
-
         return atk;
     }
 
+    /**
+     * Returns the randomized damage for the chosen move, which is overriden in the base pokemon classes for special
+     * element attacks
+     * @param atkType, trainer chooses between basic attack or special attack.
+     * @param move, the move that trainer chooses.
+     * @return random damage based on the chosen move.
+     */
     public int getAttackDamage(int atkType, int move) {
       //slam
       if(move == 1) {
@@ -101,14 +120,27 @@ public abstract class Pokemon extends Entity{
       return 0;
     }
 
+    /**
+     * Returns the attack multiplier which is 1 if basic attack move is chosen or this method will be overridden in
+     * the base pokemon classes for special elemental attacks and will return the result of the
+     * battle table (when special attack move is chosen).
+     * @param p, pokemon
+     * @param atkType, trainer chooses between basic attack (1) or special attack (2).
+     * @return 1
+     */
     public double getAttackMultiplier(Pokemon p, int atkType)
     {
-
       return 1;
-
     }
 
-    public int getAttackBonus(int atkType) {
+    /**
+     * Returns the attack bonus that will be added to the calculated damage. This method is overriden in the base
+     * pokemon classes for the special elemental attacks and in the decoration buff/debuff classes.
+     * @param atkType, trainer chooses between basic attack (1) or special attack (2).
+     * @return 0
+     */
+    public int getAttackBonus(int atkType)
+    {
         return 0;
     }
 
