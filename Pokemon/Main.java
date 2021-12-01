@@ -87,6 +87,7 @@ class Main {
         while(wildPokemon.getHp() != 0 && hpSum > 0) {
           System.out.println("What do you want to do? \n"
                   + "1. Fight\n" + "2. Use Potion\n");
+          hpSum = 0;
           for(int i = 0; i < trainer.getNumPokemon(); i++)
           {
             hpSum += trainer.getPokemon(i).getHp();
@@ -164,6 +165,7 @@ class Main {
         System.out.println("What do you want to do? \n"
                   + "1. Fight\n" + "2. Use Potion\n" + "3. Throw Poke Ball\n" 
                   + "4. Run Away");
+        hpSum = 0;
         for(int i = 0; i < trainer.getNumPokemon(); i++)
         {
            hpSum += trainer.getPokemon(i).getHp();
@@ -294,18 +296,17 @@ class Main {
    */
   public static Pokemon trainerAttack(Trainer t, Pokemon wild)
   {
-    int d = Rand.randIntRange(1,3);
     String action = "";
 
       System.out.println(wild);
       System.out.println("Choose a Pokemon \n" + t.getPokemonList());
       int pokemonChoice = CheckInput.getIntRange(1, t.getNumPokemon());
-      Pokemon battlePokemon = t.getPokemon(pokemonChoice);
+      Pokemon battlePokemon = t.getPokemon(pokemonChoice-1);
       while(battlePokemon.getHp() == 0)
       {
         System.out.println("It's downed. Please choose another one.");
         pokemonChoice = CheckInput.getIntRange(1, t.getNumPokemon());
-        battlePokemon = t.getPokemon(pokemonChoice);
+        battlePokemon = t.getPokemon(pokemonChoice-1);
       }
       System.out.println(battlePokemon.getName() + ", I choose you!");
       System.out.println(battlePokemon.getAttackTypeMenu());
