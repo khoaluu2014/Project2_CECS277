@@ -93,22 +93,28 @@ class Main {
             hpSum += trainer.getPokemon(i).getHp();
           }
           menuChoiceW = CheckInput.getIntRange(1, 2);
-          if (menuChoiceW == 1) {
-            // Fight.
-            trainerAttack(trainer, wildPokemon);
-          } else if (menuChoiceW == 2) {
-            // Use Potion.
-            if (trainer.hasPokeball()) {
-              System.out.println("Which pokemon do you want to heal?\n" + trainer.getPokemonList());
-              int potionChoice = CheckInput.getIntRange(1, trainer.getNumPokemon());
-              if (trainer.getPokemon(potionChoice - 1).getHp() > 0) {
-                trainer.usePotion(potionChoice - 1);
+          if(hpSum > 0) {
+            if (menuChoiceW == 1) {
+              // Fight.
+              trainerAttack(trainer, wildPokemon);
+            } else if (menuChoiceW == 2) {
+              // Use Potion.
+              if (trainer.hasPokeball()) {
+                System.out.println("Which pokemon do you want to heal?\n" + trainer.getPokemonList());
+                int potionChoice = CheckInput.getIntRange(1, trainer.getNumPokemon());
+                if (trainer.getPokemon(potionChoice - 1).getHp() > 0) {
+                  trainer.usePotion(potionChoice - 1);
+                } else {
+                  System.out.println("You can't revive downed Pokemons.");
+                }
               } else {
-                System.out.println("You can't revive downed Pokemons.");
+                System.out.println("You don't have any potions.");
               }
-            } else {
-              System.out.println("You don't have any potions.");
             }
+          }
+          else {
+            System.out.println("All your pokemon are downed. You take damage for them. Try again next time.");
+              trainer.takeDamage(5);
           }
         }
         level +=1;
@@ -119,10 +125,6 @@ class Main {
         }
         if(wildPokemon.getHp() == 0) {
           m.loadMap(mapNumber);
-        }
-        else {
-          System.out.println("All your pokemon are downed. You take damage for them. Try again next time.");
-          trainer.takeDamage(5);
         }
       }
       else if (encounter == 'n') { // No encounter found.
@@ -171,11 +173,13 @@ class Main {
            hpSum += trainer.getPokemon(i).getHp();
         }
         menuChoiceW = CheckInput.getIntRange(1,4);
-        if (menuChoiceW == 1) { 
-          // Fight.
-          trainerAttack(trainer, wildPokemon);
-        }
-          else if (menuChoiceW == 2) { 
+        if(hpSum > 0)
+        {
+          if (menuChoiceW == 1) {
+            // Fight.
+            trainerAttack(trainer, wildPokemon);
+          }
+          else if (menuChoiceW == 2) {
             // Use Potion.
             if(trainer.hasPotion())
             {
@@ -195,8 +199,8 @@ class Main {
               System.out.println("You don't have any potions.");
             }
           }
-          else if (menuChoiceW == 3) { 	
-          // Throw Poke Ball. Catches pokemon based on catching percentage.
+          else if (menuChoiceW == 3) {
+            // Throw Poke Ball. Catches pokemon based on catching percentage.
             if(trainer.hasPokeball())
             {
               if(trainer.catchPokemon(wildPokemon)) {
@@ -214,15 +218,17 @@ class Main {
             }
           }
         }
+        else {
+          System.out.println("All your pokemons are downed. You take damage instead.");
+           trainer.takeDamage(3);
+        }
+        }
         // Run away. Trainer leaves the fight but 'w' is not removed from map.
         if(wildPokemon.getHp() == 0)
         {
           m.removeCharAtLoc(trainer.getLocation());
         }
-        else if(hpSum == 0) {
-          System.out.println("All your pokemons are downed. You take damage instead.");
-          trainer.takeDamage(3);
-        }
+
       }  
       else if (encounter == 'p') {  
         // Random person encounter. Causes random damage on the trainer.
