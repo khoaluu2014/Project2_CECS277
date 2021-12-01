@@ -314,9 +314,13 @@ class Main {
       int move = CheckInput.getIntRange(1, battlePokemon.getNumAttackMenuItems(choice));
       action += battlePokemon.attack(wild, choice, move) + "\n";
       //Wild Pokemon Turn
-      int wildChoice = Rand.randIntRange(1, 2);
-      int wildMove = Rand.randIntRange(1, 3);
-      action += wild.attack(battlePokemon, wildChoice, wildMove);
+      if(wild.getHp() > 0)
+      {
+        int wildChoice = Rand.randIntRange(1, 2);
+        int wildMove = Rand.randIntRange(1, 3);
+        action += wild.attack(battlePokemon, wildChoice, wildMove);
+      }
+
 
     System.out.println(action);
     System.out.println(wild);
