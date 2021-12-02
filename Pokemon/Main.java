@@ -78,11 +78,11 @@ class Main {
       // When Trainer reaches finish (f), it is blocked by Gym Leader who needs to be defeated for trainer to move up to next map.
       if (encounter == 'f') {
         // Trainer to defeat Gym Leader by fighting with leader's pokemon.
-        System.out.print("You have to defeat my pokemon! You don't have an option of throwing a pokeball or runningg away.");
+        System.out.print("You have to defeat my pokemon! You don't have an option of throwing a pokeball or runningg away.\n");
 
         Pokemon wildPokemon = PokemonGenerator.getInstance().generateRandomPokemon(level);
         // Random Gym Leader's pokemon appears.
-        System.out.println("Gym Leader's " + wildPokemon.getName() + " has appeared.");
+        System.out.println("Gym Leader's " + wildPokemon + " has appeared.");
         int menuChoiceW;
         while(wildPokemon.getHp() > 0 && hpSum > 0) {
           hpSum = 0;
@@ -96,7 +96,7 @@ class Main {
             menuChoiceW = CheckInput.getIntRange(1, 2);
             if (menuChoiceW == 1) {
               // Fight.
-              trainerAttack(trainer, wildPokemon);
+              wildPokemon = trainerAttack(trainer, wildPokemon);
             } else if (menuChoiceW == 2) {
               // Use Potion.
               if (trainer.hasPotion()) {
@@ -107,7 +107,8 @@ class Main {
                 } else {
                   System.out.println("You can't revive downed Pokemons.");
                 }
-              } else {
+              }
+              else {
                 System.out.println("You don't have any potions.");
               }
             }
