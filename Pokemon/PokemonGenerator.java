@@ -19,7 +19,7 @@ public class PokemonGenerator {
      * elemental type.
      */
     public PokemonGenerator() {
-        try(Scanner sc = new Scanner(new File("Pokemon/PokemonList.txt"))) {
+        try(Scanner sc = new Scanner(new File("PokemonList.txt"))) {
             while(sc.hasNextLine()) {
                 String[] line = sc.nextLine().split(",");
                 pokemon.put(line[0], line[1]);
