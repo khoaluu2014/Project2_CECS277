@@ -132,7 +132,7 @@ public class Trainer extends Entity{
                   System.out.println("You have too many pokemons, please say goodbye to one.");
                   getPokemonList();
                   int choice = CheckInput.getIntRange(1, pokemon.size());
-                  removePokemon(choice);
+                  removePokemon(choice-1);
               }
               return true;
           }
@@ -292,8 +292,7 @@ public class Trainer extends Entity{
    */
   @Override
   public String toString(){
-	  String str =  super.toString() + "\nMoney: " + money + "\nPotions: " + potions + "\nPoke Balls: " + pokeballs + "\n" + getPokemonList() + "\n" + Map.getInstance().mapToString(loc);
-    return str;
+	  return super.toString() + "\nMoney: " + money + "\nPotions: " + potions + "\nPoke Balls: " + pokeballs + "\n" + getPokemonList() + "\n" + Map.getInstance().mapToString(loc);
   }
 }
 

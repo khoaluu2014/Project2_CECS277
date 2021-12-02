@@ -163,7 +163,7 @@ class Main {
           trainer.debuffAllPokemon();
           System.out.println("The wild Pokemon has intimidated your Pokemons.");
         }
-        while(menuChoiceW != 4 && wildPokemon.getHp() > 0 && hpSum > 0 &&!isCaught) {
+        while(menuChoiceW != 4 && wildPokemon.getHp() > 0 && hpSum > 0 && !isCaught) {
         System.out.println("What do you want to do? \n"
                   + "1. Fight\n" + "2. Use Potion\n" + "3. Throw Poke Ball\n" 
                   + "4. Run Away");
@@ -228,7 +228,10 @@ class Main {
         {
           m.removeCharAtLoc(trainer.getLocation());
         }
-
+        else if(hpSum == 0){
+          System.out.println("All your pokemons are downed. You take damage instead.");
+          trainer.takeDamage(3);
+        }
       }  
       else if (encounter == 'p') {  
         // Random person encounter. Causes random damage on the trainer.
