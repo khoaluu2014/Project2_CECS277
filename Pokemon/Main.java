@@ -118,13 +118,14 @@ class Main {
           }
         }
         if(wildPokemon.getHp() == 0) {
-          mapNumber++;
-          m.loadMap(mapNumber);
-          level +=2;
           if(mapNumber > 3)
           {
             mapNumber = 1;
           }
+          mapNumber++;
+          m.loadMap(mapNumber);
+          level +=2;
+
         }
       }
       else if (encounter == 'n') { // No encounter found.
