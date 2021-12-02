@@ -154,15 +154,6 @@ class Main {
         System.out.println("A wild " + wildPokemon.getName() + " has appeared.");
         int menuChoiceW = 0;
         boolean isCaught = false;
-        int debuff = Rand.randIntRange(1, 10);
-        if(debuff <= 4) {
-          wildPokemon = PokemonGenerator.getInstance().addRandomDebuff(wildPokemon);
-          System.out.println("Your Pokemons has scared the wild Pokemon.");
-        }
-        else if(debuff == 5) {
-          trainer.debuffAllPokemon();
-          System.out.println("The wild Pokemon has intimidated your Pokemons.");
-        }
         while(menuChoiceW != 4 && wildPokemon.getHp() > 0 && hpSum > 0 && !isCaught) {
         System.out.println("What do you want to do? \n"
                   + "1. Fight\n" + "2. Use Potion\n" + "3. Throw Poke Ball\n" 
@@ -177,7 +168,7 @@ class Main {
         {
           if (menuChoiceW == 1) {
             // Fight.
-            trainerAttack(trainer, wildPokemon);
+           wildPokemon = trainerAttack(trainer, wildPokemon);
           }
           else if (menuChoiceW == 2) {
             // Use Potion.
@@ -217,10 +208,6 @@ class Main {
               System.out.println("You don't have any pokeballs.");
             }
           }
-        }
-        else {
-          System.out.println("All your pokemons are downed. You take damage instead.");
-           trainer.takeDamage(3);
         }
         }
         // Run away. Trainer leaves the fight but 'w' is not removed from map.
@@ -306,11 +293,20 @@ class Main {
   public static Pokemon trainerAttack(Trainer t, Pokemon wild)
   {
     String action = "";
-
-      System.out.println(wild);
+    int debuff = Rand.randIntRange(1, 10);
       System.out.println("Choose a Pokemon \n" + t.getPokemonList());
       int pokemonChoice = CheckInput.getIntRange(1, t.getNumPokemon());
       Pokemon battlePokemon = t.getPokemon(pokemonChoice-1);
+      if(debuff <= 4) {
+        wild = PokemonGenerator.getInstance().addRandomDebuff(wild);
+        System.out.println("Your Pokemons has scared the wild Pokemon.");
+      }
+      else if(debuff == 5) {
+        t.debuffPokemon(pokemonChoice - 1);
+        battlePokemon = t.getPokemon(pokemonChoice-1);
+        System.out.println("The wild Pokemon has intimidated your Pokemon.");
+      }
+      System.out.println(wild);
       while(battlePokemon.getHp() == 0)
       {
         System.out.println("It's downed. Please choose another one.");
@@ -335,7 +331,7 @@ class Main {
 
     System.out.println(action);
     System.out.println(wild);
-    return battlePokemon;
+    return wild;
   }
 
   /**

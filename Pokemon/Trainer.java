@@ -247,11 +247,8 @@ public class Trainer extends Entity{
     /**
      * Pokemons are debuffed to decrease their stats.
      */
-  public void debuffAllPokemon() {
-      for(int i = 0; i < pokemon.size(); i++)
-      {
-          pokemon.set(i, PokemonGenerator.getInstance().addRandomDebuff(getPokemon(i)));
-      }
+  public void debuffPokemon(int index) {
+      pokemon.set(index, PokemonGenerator.getInstance().addRandomDebuff(pokemon.get(index)));
   }
   /**
    * Gets the index of the pokemon from the list of pokemons. Trainer selects pokemon from the list 

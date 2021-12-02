@@ -9,6 +9,7 @@ public class HpUp  extends PokemonDecorator{
      * @param p type of pokemon
      */
     public HpUp(Pokemon p){
+
         super(p, "+HP", Rand.randIntRange(1, 2));
     }
 }
